@@ -1,29 +1,38 @@
-# DNS Server Backup Script
+# DNS Forward Lookup Zone Backup Script
 
-This PowerShell script is designed to automate the backup process of all forward lookup zones in a DNS server environment. It simplifies the task of exporting zone configurations and copying zone files to a secure backup location.
+This PowerShell script provides an automated approach to back up all forward lookup zones on a DNS server, targeting environments where the DNS server role is installed on Windows Server. It facilitates the export of zone configurations to a CSV file and backs up the actual zone files to a designated directory.
 
-## Features
+## How It Works
 
-- **Automated Backup**: Effortlessly backs up all forward lookup zones along with their configurations.
-- **Export to CSV**: Zone configurations are neatly exported to a CSV file for easy management and review.
-- **Customizable Backup Locations**: Users can specify backup directories for both configurations and zone files.
+The script performs several key operations:
 
-## Getting Started
+1. **Defines the Backup Directory:** It sets a base directory for the backups and a child directory for the zone files. It also defines a path for the configuration export file, incorporating the current date for versioning.
+2. **Checks for Directory Existence:** Before proceeding with the backups, it ensures that the specified directories exist, creating them if necessary.
+3. **Exports Zone Configurations:** It filters for primary forward lookup zones that are not reverse lookup zones and exports their configurations to the predefined CSV file path.
+4. **Backs Up Zone Files:** For each eligible zone, it locates the zone file and copies it to the backup directory, ensuring that both configuration data and zone data are preserved.
 
-### Prerequisites
+## Prerequisites
 
-- Windows Server with the DNS Server role installed.
-- PowerShell 5.1 or higher.
-- Administrative privileges on the server where the script will be executed.
+Before running this script, ensure that:
+- You have administrative access to the DNS server.
+- PowerShell is enabled and can execute scripts (adjust your execution policy if necessary).
 
-### Installation
+## Usage
 
-1. Clone this repository or download the script file directly.
-2. Place the script in a directory of your choice on the DNS server.
+To use this script:
 
-### Usage
+1. Modify the `$backupBaseDir` variable at the beginning of the script to specify your backup directory.
+2. Run the script in a PowerShell terminal with administrative privileges.
 
-To run the script, navigate to the script's directory in a PowerShell window run as Administrator and execute:
+## Script Author
 
-```powershell
-.\DNS_Backup_Script.ps1
+This script was authored by [aviado1](https://github.com/aviado1), dedicated to enhancing system administration practices through efficient scripting.
+
+## Disclaimer
+
+This script is provided "as is," with no guarantees. Always test scripts in a safe, non-production environment before deployment.
+
+## Contributions
+
+Your contributions are welcome! If you have suggestions for improvement or have identified bugs, please fork the repository, make your changes, and submit a pull request.
+
